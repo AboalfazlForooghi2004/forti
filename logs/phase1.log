@@ -1,0 +1,8 @@
+2025-12-23 06:17:04,095 - INFO - Fetching Address Objects
+2025-12-23 06:17:13,465 - INFO - Fetching Address Objects
+2025-12-23 06:19:18,906 - ERROR - Phase 1 failed: HTTPSConnectionPool(host='192.168.1.1', port=443): Max retries exceeded with url: /api/v2/cmdb/firewall/address (Caused by ConnectTimeoutError(<HTTPSConnection(host='192.168.1.1', port=443) at 0x73031bcac290>, 'Connection to 192.168.1.1 timed out. (connect timeout=None)'))
+2025-12-23 06:19:27,098 - ERROR - Phase 1 failed: HTTPSConnectionPool(host='192.168.1.1', port=443): Max retries exceeded with url: /api/v2/cmdb/firewall/address (Caused by ConnectTimeoutError(<HTTPSConnection(host='192.168.1.1', port=443) at 0x73031bcaf410>, 'Connection to 192.168.1.1 timed out. (connect timeout=None)'))
+2025-12-23 06:19:50,389 - INFO - Fetching Address Objects
+2025-12-23 06:20:02,042 - INFO - Fetching Address Objects
+2025-12-23 06:22:06,842 - ERROR - Phase 1 failed: HTTPSConnectionPool(host='192.168.1.1', port=443): Max retries exceeded with url: /api/v2/cmdb/firewall/address (Caused by ConnectTimeoutError(<HTTPSConnection(host='192.168.1.1', port=443) at 0x73031bcb2c10>, 'Connection to 192.168.1.1 timed out. (connect timeout=None)'))
+2025-12-23 06:22:15,034 - ERROR - Phase 1 failed: HTTPSConnectionPool(host='192.168.1.1', port=443): Max retries exceeded with url: /api/v2/cmdb/firewall/address (Caused by ConnectTimeoutError(<HTTPSConnection(host='192.168.1.1', port=443) at 0x73031bcaeb90>, 'Connection to 192.168.1.1 timed out. (connect timeout=None)'))

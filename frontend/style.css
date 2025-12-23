@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+    direction: rtl;
+    padding: 20px;
+}
+
+button {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+pre {
+    background: #f4f4f4;
+    padding: 10px;
+    max-height: 300px;
+    overflow: auto;
+}
