@@ -15,6 +15,21 @@
 
 <h3>Address Groups</h3>
 <pre id="groups"></pre>
+<div class="card">
+  <h3>Phase 2: Analysis</h3>
+
+  <button onclick="loadDuplicates()">Find Duplicate IP Objects</button>
+
+  <pre id="duplicates"></pre>
+
+  <hr>
+
+  <input id="ipInput" placeholder="Enter IP (e.g. 192.168.1.10)">
+  <button onclick="findGroups()">Find Groups</button>
+
+  <pre id="groupsResult"></pre>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>
