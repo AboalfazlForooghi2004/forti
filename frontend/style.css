@@ -1,4 +1,9 @@
 body {
+  background: red !important;
+}
+
+
+body {
   font-family: sans-serif;
   direction: rtl;
   padding: 20px;
@@ -57,4 +62,7 @@ textarea {
   border: 1px solid #334155;
   border-radius: 8px;
   padding: 8px;
+}
+button.danger {
+  background: #dc2626;
 }

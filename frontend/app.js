@@ -84,3 +84,13 @@ function runAutomation() {
   .then(d => p4Result.textContent = JSON.stringify(d, null, 2))
   .catch(() => alert("Automation failed"));
 }
+function rollbackVIP() {
+  fetch("/api/phase5/rollback", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ vip_name: rbVip.value })
+  })
+  .then(r => r.json())
+  .then(d => rbResult.textContent = JSON.stringify(d, null, 2))
+  .catch(() => alert("Rollback failed"));
+}
