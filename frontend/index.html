@@ -30,6 +30,48 @@
   <pre id="groupsResult"></pre>
 </div>
 
+<div class="card">
+  <h3>Phase 3: VIP Management</h3>
+
+  <h4>Create VIP</h4>
+
+  <input placeholder="VIP Name" id="vipName">
+  <input placeholder="External IP" id="extIp">
+  <input placeholder="Mapped IP" id="mapIp">
+  <input placeholder="Interface (e.g. wan1)" id="vipIntf">
+  <input placeholder="External Port" id="extPort">
+  <input placeholder="Mapped Port" id="mapPort">
+
+  <button onclick="createVIP()">Create VIP</button>
+
+  <hr>
+
+  <h4>Update Firewall Policy</h4>
+
+  <input placeholder="Policy ID" id="policyId">
+  <input placeholder="VIP Name" id="policyVip">
+
+  <button onclick="updatePolicy()">Update Policy</button>
+
+  <pre id="phase3Result"></pre>
+</div>
+<div class="card">
+  <h3>Phase 4: Automation</h3>
+
+  <input placeholder="External IP" id="p4ExtIp">
+  <input placeholder="Interface (wan1)" id="p4Intf">
+  <input placeholder="Policy ID" id="p4Policy">
+
+  <h4>Targets</h4>
+  <textarea id="p4Targets"
+    placeholder="192.168.1.10:80&#10;192.168.1.11:80"></textarea>
+
+  <button onclick="runAutomation()">Run Automation</button>
+
+  <pre id="p4Result"></pre>
+</div>
+
+
 <script src="app.js"></script>
 </body>
 </html>

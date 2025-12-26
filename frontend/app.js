@@ -33,3 +33,54 @@ function findGroups() {
         JSON.stringify(data.groups, null, 2);
     });
 }
+function createVIP() {
+  const payload = {
+    name: vipName.value,
+    external_ip: extIp.value,
+    mapped_ip: mapIp.value,
+    interface: vipIntf.value,
+    external_port: extPort.value,
+    mapped_port: mapPort.value
+  };
+
+  fetch("/api/phase3/vip", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(d => phase3Result.textContent = JSON.stringify(d, null, 2));
+}
+
+function updatePolicy() {
+  fetch("/api/phase3/policy", {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      policy_id: policyId.value,
+      vip_name: policyVip.value
+    })
+  })
+  .then(r => r.json())
+  .then(d => phase3Result.textContent = JSON.stringify(d, null, 2));
+}
+function runAutomation() {
+  const targets = p4Targets.value.split("\n").map(line => {
+    const [ip, port] = line.split(":");
+    return { ip, port: parseInt(port) };
+  });
+
+  fetch("/api/phase4/publish", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      external_ip: p4ExtIp.value,
+      interface: p4Intf.value,
+      policy_id: parseInt(p4Policy.value),
+      targets
+    })
+  })
+  .then(r => r.json())
+  .then(d => p4Result.textContent = JSON.stringify(d, null, 2))
+  .catch(() => alert("Automation failed"));
+}
