@@ -7,16 +7,27 @@ services:
       - .env
     volumes:
       - ./logs:/app/logs
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"   # فقط داخل شبکه
     restart: always
+    networks:
+      - forti-net
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
 
   frontend:
     build:
       context: ./frontend
     container_name: fortigate_frontend
     ports:
-      - "8080:80"
+      - "8080:80"   # فقط frontend از بیرون
     depends_on:
       - backend
     restart: always
+    networks:
+      - forti-net
+
+networks:
+  forti-net:
+    driver: bridge
