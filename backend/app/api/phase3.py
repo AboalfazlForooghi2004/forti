@@ -11,17 +11,22 @@ def create_vip(payload: dict):
         client = FortiGateClient()
         vip_payload = build_vip_payload(payload)
 
-        url = f"{client.base_url}/api/v2/cmdb/firewall/vip"
-        r = client.session.post(url, json=vip_payload)
-        r.raise_for_status()
+        result = client.post("/api/v2/cmdb/firewall/vip", vip_payload)
 
-        logger.info(f"VIP {payload['name']} created")
+        logger.info(f"VIP {payload['name']} created successfully")
 
-        return {"status": "success", "vip": payload["name"]}
+        return {
+            "status": "success",
+            "vip": payload["name"],
+            "result": result
+        }
 
     except Exception as e:
-        logger.error(str(e))
-        raise HTTPException(status_code=500, detail="VIP creation failed")
+        logger.error(f"VIP creation failed: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"VIP creation failed: {str(e)}"
+        )
 
 
 @router.put("/policy")
@@ -31,19 +36,31 @@ def update_policy(payload: dict):
         vip_name = payload.get("vip_name")
 
         if not policy_id or not vip_name:
-            raise HTTPException(status_code=400, detail="Missing fields")
+            raise HTTPException(
+                status_code=400,
+                detail="Missing required fields: policy_id, vip_name"
+            )
 
         client = FortiGateClient()
         update_payload = build_policy_update(vip_name)
 
-        url = f"{client.base_url}/api/v2/cmdb/firewall/policy/{policy_id}"
-        r = client.session.put(url, json=update_payload)
-        r.raise_for_status()
+        result = client.put(
+            f"/api/v2/cmdb/firewall/policy/{policy_id}",
+            update_payload
+        )
 
         logger.info(f"Policy {policy_id} updated with VIP {vip_name}")
 
-        return {"status": "success"}
+        return {
+            "status": "success",
+            "policy_id": policy_id,
+            "vip_name": vip_name,
+            "result": result
+        }
 
     except Exception as e:
-        logger.error(str(e))
-        raise HTTPException(status_code=500, detail="Policy update failed")
+        logger.error(f"Policy update failed: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Policy update failed: {str(e)}"
+        )

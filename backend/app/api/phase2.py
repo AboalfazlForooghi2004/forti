@@ -16,15 +16,19 @@ def duplicate_addresses():
 
         duplicates = find_duplicate_addresses(addresses)
 
-        logger.info("Duplicate IP analysis completed")
+        logger.info(f"Duplicate IP analysis completed - Found {len(duplicates)} duplicates")
 
         return {
-            "duplicates": duplicates
+            "duplicates": duplicates,
+            "count": len(duplicates)
         }
 
     except Exception as e:
-        logger.error(str(e))
-        raise HTTPException(status_code=500, detail="Analysis failed")
+        logger.error(f"Duplicate analysis failed: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Analysis failed: {str(e)}"
+        )
 
 
 @router.post("/ip-groups")
@@ -32,7 +36,10 @@ def ip_group_lookup(payload: dict):
     try:
         ip = payload.get("ip")
         if not ip:
-            raise HTTPException(status_code=400, detail="IP is required")
+            raise HTTPException(
+                status_code=400,
+                detail="IP address is required"
+            )
 
         client = FortiGateClient()
         addresses = client.get_address_objects()
@@ -40,11 +47,17 @@ def ip_group_lookup(payload: dict):
 
         result = find_groups_for_ip(ip, addresses, groups)
 
+        logger.info(f"IP lookup for {ip} - Found {len(result)} groups")
+
         return {
             "ip": ip,
-            "groups": result
+            "groups": result,
+            "count": len(result)
         }
 
     except Exception as e:
-        logger.error(str(e))
-        raise HTTPException(status_code=500, detail="Lookup failed")
+        logger.error(f"IP lookup failed for {ip}: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Lookup failed: {str(e)}"
+        )
